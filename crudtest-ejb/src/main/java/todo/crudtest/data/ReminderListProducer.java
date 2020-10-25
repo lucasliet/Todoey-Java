@@ -25,30 +25,30 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-import todo.crudtest.model.Member;
+import todo.crudtest.model.Reminder;
 
 @RequestScoped
-public class MemberListProducer {
+public class ReminderListProducer {
 
     @Inject
-    private MemberRepository memberRepository;
+    private ReminderRepository reminderRepository;
 
-    private List<Member> members;
+    private List<Reminder> reminders;
 
     // @Named provides access the return value via the EL variable name "members" in the UI (e.g.,
     // Facelets or JSP view)
     @Produces
     @Named
-    public List<Member> getMembers() {
-        return members;
+    public List<Reminder> getReminders() {
+        return reminders;
     }
 
-    public void onMemberListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Member member) {
-        retrieveAllMembersOrderedByName();
+    public void onReminderListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final Reminder reminder) {
+        retrieveAllRemindersOrderedByName();
     }
 
     @PostConstruct
-    public void retrieveAllMembersOrderedByName() {
-        members = memberRepository.findAllOrderedByName();
+    public void retrieveAllRemindersOrderedByName() {
+    	reminders = reminderRepository.findAllOrderedByName();
     }
 }

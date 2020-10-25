@@ -24,37 +24,37 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-import todo.crudtest.model.Member;
+import todo.crudtest.model.Reminder;
 
 @ApplicationScoped
-public class MemberRepository {
+public class ReminderRepository {
 
     @Inject
     private EntityManager em;
 
-    public Member findById(Long id) {
-        return em.find(Member.class, id);
+    public Reminder findById(Long id) {
+        return em.find(Reminder.class, id);
     }
 
-    public Member findByEmail(String email) {
+    public Reminder findByTitle(String title) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
-        Root<Member> member = criteria.from(Member.class);
+        CriteriaQuery<Reminder> criteria = cb.createQuery(Reminder.class);
+        Root<Reminder> reminder = criteria.from(Reminder.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
-        // criteria.select(member).where(cb.equal(member.get(Member_.name), email));
-        criteria.select(member).where(cb.equal(member.get("email"), email));
+        // criteria.select(reminder).where(cb.equal(reminder.get(reminder_.name), email));
+        criteria.select(reminder).where(cb.equal(reminder.get("title"), title));
         return em.createQuery(criteria).getSingleResult();
     }
 
-    public List<Member> findAllOrderedByName() {
+    public List<Reminder> findAllOrderedByName() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
-        Root<Member> member = criteria.from(Member.class);
+        CriteriaQuery<Reminder> criteria = cb.createQuery(Reminder.class);
+        Root<Reminder> reminder = criteria.from(Reminder.class);
         // Swap criteria statements if you would like to try out type-safe criteria queries, a new
         // feature in JPA 2.0
-        // criteria.select(member).orderBy(cb.asc(member.get(Member_.name)));
-        criteria.select(member).orderBy(cb.asc(member.get("name")));
+        // criteria.select(reminder).orderBy(cb.asc(reminder.get(reminder_.name)));
+        criteria.select(reminder).orderBy(cb.asc(reminder.get("title")));
         return em.createQuery(criteria).getResultList();
     }
 }

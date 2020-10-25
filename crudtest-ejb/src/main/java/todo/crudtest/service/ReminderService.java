@@ -16,17 +16,18 @@
  */
 package todo.crudtest.service;
 
-import todo.crudtest.model.Member;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.util.logging.Logger;
+
+import todo.crudtest.model.Reminder;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
 @Stateless
-public class MemberRegistration {
+public class ReminderService {
 
     @Inject
     private Logger log;
@@ -35,11 +36,19 @@ public class MemberRegistration {
     private EntityManager em;
 
     @Inject
-    private Event<Member> memberEventSrc;
+    private Event<Reminder> reminderEventSrc;
 
-    public void register(Member member) throws Exception {
-        log.info("Registering " + member.getName());
-        em.persist(member);
-        memberEventSrc.fire(member);
+    public void register(Reminder reminder) throws Exception {
+        log.info("Registering " + reminder.getTitle());
+        em.persist(reminder);
+        reminderEventSrc.fire(reminder);
+    }
+    
+    public void remove(Reminder reminder) throws Exception {
+    	if(reminder != null) {    		
+    		log.info("Removing " + reminder.getTitle());
+    		em.remove(reminder);
+    		reminderEventSrc.fire(reminder);
+    	}
     }
 }

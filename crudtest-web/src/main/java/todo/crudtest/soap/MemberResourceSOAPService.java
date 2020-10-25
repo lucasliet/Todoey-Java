@@ -7,18 +7,18 @@ import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import todo.crudtest.data.MemberRepository;
-import todo.crudtest.model.Member;
+import todo.crudtest.data.ReminderRepository;
+import todo.crudtest.model.Reminder;
 
 @Stateless
 @WebService
 public class MemberResourceSOAPService {
 	
 	@Inject
-	private MemberRepository repository;
+	private ReminderRepository repository;
 	
 	@WebMethod
-	public List<Member> listAllMembers() {
+	public List<Reminder> listAllMembers() {
 		return repository.findAllOrderedByName();
 	}
 

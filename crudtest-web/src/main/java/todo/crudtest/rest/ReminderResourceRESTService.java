@@ -25,7 +25,6 @@ import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
@@ -40,18 +39,18 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import todo.crudtest.data.MemberRepository;
-import todo.crudtest.model.Member;
-import todo.crudtest.service.MemberRegistration;
+import todo.crudtest.data.ReminderRepository;
+import todo.crudtest.model.Reminder;
+import todo.crudtest.service.ReminderService;
 
 /**
  * JAX-RS Example
  * <p/>
  * This class produces a RESTful service to read/write the contents of the members table.
  */
-@Path("/members")
+@Path("/reminders")
 @RequestScoped
-public class MemberResourceRESTService {
+public class ReminderResourceRESTService {
     @Inject
     private Logger log;
 
@@ -59,22 +58,22 @@ public class MemberResourceRESTService {
     private Validator validator;
 
     @Inject
-    private MemberRepository repository;
+    private ReminderRepository repository;
 
     @Inject
-    MemberRegistration registration;
+    ReminderService service;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Member> listAllMembers() {
+    public List<Reminder> listAllMembers() {
         return repository.findAllOrderedByName();
     }
 
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Member lookupMemberById(@PathParam("id") long id) {
-        Member member = repository.findById(id);
+    public Reminder lookupMemberById(@PathParam("id") long id) {
+        Reminder member = repository.findById(id);
         if (member == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -88,26 +87,21 @@ public class MemberResourceRESTService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createMember(Member member) {
+    public Response createReminder(Reminder reminder) {
 
         Response.ResponseBuilder builder = null;
 
         try {
             // Validates member using bean validation
-            validateMember(member);
+            validateReminder(reminder);
 
-            registration.register(member);
+            service.register(reminder);
 
             // Create an "ok" response
             builder = Response.ok();
         } catch (ConstraintViolationException ce) {
             // Handle bean validation issues
             builder = createViolationResponse(ce.getConstraintViolations());
-        } catch (ValidationException e) {
-            // Handle the unique constrain violation
-            Map<String, String> responseObj = new HashMap<>();
-            responseObj.put("email", "Email taken");
-            builder = Response.status(Response.Status.CONFLICT).entity(responseObj);
         } catch (Exception e) {
             // Handle generic exceptions
             Map<String, String> responseObj = new HashMap<>();
@@ -128,21 +122,16 @@ public class MemberResourceRESTService {
      * exception so that it can be interpreted separately.
      * </p>
      * 
-     * @param member Member to be validated
+     * @param reminder Reminder to be validated
      * @throws ConstraintViolationException If Bean Validation errors exist
      * @throws ValidationException If member with the same email already exists
      */
-    private void validateMember(Member member) throws ConstraintViolationException, ValidationException {
+    private void validateReminder(Reminder reminder) throws ConstraintViolationException, ValidationException {
         // Create a bean validator and check for issues.
-        Set<ConstraintViolation<Member>> violations = validator.validate(member);
+        Set<ConstraintViolation<Reminder>> violations = validator.validate(reminder);
 
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(new HashSet<ConstraintViolation<?>>(violations));
-        }
-
-        // Check the uniqueness of the email address
-        if (emailAlreadyExists(member.getEmail())) {
-            throw new ValidationException("Unique Email Violation");
         }
     }
 
@@ -163,22 +152,5 @@ public class MemberResourceRESTService {
         }
 
         return Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
-    }
-
-    /**
-     * Checks if a member with the same email address is already registered. This is the only way to easily capture the
-     * "@UniqueConstraint(columnNames = "email")" constraint from the Member class.
-     * 
-     * @param email The email to check
-     * @return True if the email already exists, and false otherwise
-     */
-    public boolean emailAlreadyExists(String email) {
-        Member member = null;
-        try {
-            member = repository.findByEmail(email);
-        } catch (NoResultException e) {
-            // ignore
-        }
-        return member != null;
     }
 }

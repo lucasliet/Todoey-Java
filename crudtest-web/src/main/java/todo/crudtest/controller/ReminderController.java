@@ -24,33 +24,33 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import todo.crudtest.model.Member;
-import todo.crudtest.service.MemberRegistration;
+import todo.crudtest.model.Reminder;
+import todo.crudtest.service.ReminderService;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
 // EL name
 // Read more about the @Model stereotype in this FAQ:
 // http://www.cdi-spec.org/faq/#accordion6
 @Model
-public class MemberController {
+public class ReminderController {
 
     @Inject
     private FacesContext facesContext;
 
     @Inject
-    private MemberRegistration memberRegistration;
+    private ReminderService reminderService;
 
-    private Member newMember;
+    private Reminder newReminder;
 
     @Produces
     @Named
-    public Member getNewMember() {
-        return newMember;
+    public Reminder getNewReminder() {
+        return newReminder;
     }
 
     public void register() throws Exception {
         try {
-            memberRegistration.register(newMember);
+            reminderService.register(newReminder);
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful"));
             initNewMember();
@@ -60,10 +60,22 @@ public class MemberController {
             facesContext.addMessage(null, m);
         }
     }
+    
+    public void remove(Reminder reminder) throws Exception {
+    	try {
+    		reminderService.remove(reminder);
+    		facesContext.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Removed!", "Remove successful"));
+    	} catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration Unsuccessful");
+            facesContext.addMessage(null, m);
+        }
+    }
 
     @PostConstruct
     public void initNewMember() {
-        newMember = new Member();
+        newReminder = new Reminder();
     }
 
     private String getRootErrorMessage(Exception e) {
