@@ -22,6 +22,8 @@ public class Reminder implements Serializable {
 
 	private String title;
 	
+	private String body;
+	
 	@Temporal(TemporalType.DATE)
 	private Calendar lastModified = Calendar.getInstance();
 	
@@ -62,7 +64,13 @@ public class Reminder implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 	
+	public void setBody(String body) {
+		this.body = body;
+	}
+	
+	public String getBody() {
+		return body;
+	}
 
 }

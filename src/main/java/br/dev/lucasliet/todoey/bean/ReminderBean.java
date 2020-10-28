@@ -39,12 +39,12 @@ public class ReminderBean implements Serializable {
 		return reminders;
 	}
 
-	public void findReminderById() {
+	public void findById() {
 		this.reminder = reminderDAO.findById(this.reminder.getId());
 	}
 
 	@Transactional
-	public void create() {
+	public void save() {
 		if (this.reminder.getId() == null) {
 			reminderDAO.add(this.reminder);
 			this.reminders = reminderDAO.findAll();
