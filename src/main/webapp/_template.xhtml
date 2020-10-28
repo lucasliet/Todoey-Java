@@ -12,6 +12,7 @@
 			<div style="display:flex; justify-content:space-between; align-items:center">
 				<h:graphicImage library="img" name="logo.png" />
 				<div style="display:flex; justify-content:space-between; align-items:center">				
+					<p:commandButton value="Popula Banco de Dados" action="#{populaBanco.init}" process="@this" />
 					<h:form rendered="#{usuarioLogado != null}">
 						<p:themeSwitcher id="basic" style="width:165px; margin-left:.5rem" value="#{temaBean.tema}">
 				            <f:selectItem itemLabel="Choose Theme" itemValue="" />

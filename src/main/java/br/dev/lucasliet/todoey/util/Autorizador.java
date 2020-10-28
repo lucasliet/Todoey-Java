@@ -6,7 +6,7 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 
-import br.dev.lucasliet.todoey.model.User;
+import br.dev.lucasliet.todoey.model.UserLogin;
 
 public class Autorizador implements PhaseListener {
 
@@ -22,7 +22,7 @@ public class Autorizador implements PhaseListener {
 			return;
 		}
 
-		User loggedUser = (User) context.getExternalContext()
+		UserLogin loggedUser = (UserLogin) context.getExternalContext()
 				.getSessionMap().get("loggedUser");
 
 		if (loggedUser != null) {

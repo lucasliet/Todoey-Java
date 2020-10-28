@@ -28,7 +28,7 @@ public class Reminder implements Serializable {
 	private Calendar lastModified = Calendar.getInstance();
 	
 	@ManyToOne
-	private User user;
+	private UserLogin user;
 
 	public Reminder() {
 	}
@@ -57,11 +57,11 @@ public class Reminder implements Serializable {
 		this.lastModified = lastModified;
 	}
 
-	public User getUser() {
+	public UserLogin getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserLogin user) {
 		this.user = user;
 	}
 	
