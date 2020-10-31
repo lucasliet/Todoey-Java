@@ -33,7 +33,7 @@ public class LoginBean implements Serializable {
 		if (userDAO.exist(this.user)) {
 			context.getExternalContext().getSessionMap()
 					.put("loggedUser", this.user);
-			return "todoey?faces-redirect=true";
+			return "home?faces-redirect=true";
 		}
 
 		context.getExternalContext().getFlash().setKeepMessages(true);

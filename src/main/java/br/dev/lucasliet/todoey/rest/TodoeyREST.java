@@ -21,11 +21,6 @@ import javax.ws.rs.core.Response;
 import br.dev.lucasliet.todoey.dao.ReminderDAO;
 import br.dev.lucasliet.todoey.model.Reminder;
 
-/**
- * JAX-RS Example
- * <p/>
- * This class produces a RESTful service to read/write the contents of the members table.
- */
 @Path("/reminders")
 @RequestScoped
 public class TodoeyREST {

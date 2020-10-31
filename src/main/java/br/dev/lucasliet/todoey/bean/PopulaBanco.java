@@ -33,7 +33,7 @@ public class PopulaBanco implements Serializable {
 	private static Reminder generateReminder(UserLogin user) {
 		Reminder reminder = new Reminder();
 		reminder.setTitle("First Reminder");
-		reminder.setBody("Test for the first reminder body");
+		reminder.setBody("Test");
 		reminder.setUser(user);
 		return reminder;
 	}
