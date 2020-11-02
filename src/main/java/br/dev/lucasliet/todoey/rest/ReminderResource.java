@@ -24,7 +24,8 @@ import br.dev.lucasliet.todoey.model.Reminder;
 
 @Path("/reminders")
 @RequestScoped
-public class TodoeyREST {
+public class ReminderResource {
+	
     @Inject
     private ReminderDAO reminderDAO;
 
