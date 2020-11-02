@@ -8,7 +8,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import br.dev.lucasliet.todoey.bean.LoginBean;
 import br.dev.lucasliet.todoey.model.Reminder;
+import br.dev.lucasliet.todoey.model.User;
 
 @Stateless
 @SuppressWarnings("serial")
@@ -18,13 +20,14 @@ public class ReminderDAO implements Serializable {
 	EntityManager manager;
 
 	private GenericDAO<Reminder> dao;
-
+	
 	@PostConstruct
 	void init() {
 		this.dao = new GenericDAO<Reminder>(this.manager, Reminder.class);
 	}
 
 	public void add(Reminder t) {
+		t.setUser(LoginBean.getLoggedUser());
 		dao.add(t);
 	}
 
@@ -33,6 +36,7 @@ public class ReminderDAO implements Serializable {
 	}
 
 	public void update(Reminder t) {
+		t.setUser(LoginBean.getLoggedUser());
 		dao.update(t);
 	}
 

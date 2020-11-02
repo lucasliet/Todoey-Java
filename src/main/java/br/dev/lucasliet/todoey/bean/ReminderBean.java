@@ -7,10 +7,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import br.dev.lucasliet.todoey.dao.ReminderDAO;
 import br.dev.lucasliet.todoey.model.Reminder;
+import br.dev.lucasliet.todoey.model.User;
 
 @Named
 @ViewScoped
@@ -27,7 +30,7 @@ public class ReminderBean implements Serializable {
 
 	@Inject
 	FacesContext context;
-
+	
 	public Reminder getReminder() {
 		return reminder;
 	}

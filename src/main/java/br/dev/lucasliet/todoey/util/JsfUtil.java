@@ -11,5 +11,5 @@ public class JsfUtil {
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
 	}
-
+	
 }

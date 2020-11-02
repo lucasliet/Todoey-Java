@@ -34,7 +34,7 @@ class ListReminders{
 	@XmlElement(name = "reminder")
 	private List<Reminder> reminders;
 	
-	public ListReminders(List reminders) {
+	public ListReminders(List<Reminder> reminders) {
 		this.reminders = reminders;
 	}
 	

@@ -30,7 +30,8 @@ public class LoginBean implements Serializable {
 	}
 
 	public String login() {
-		if (userDAO.exist(this.user)) {
+		this.user = userDAO.retrieveUser(this.user);
+		if (this.user != null) {
 			context.getExternalContext().getSessionMap()
 					.put("loggedUser", this.user);
 			return "home?faces-redirect=true";
@@ -42,8 +43,12 @@ public class LoginBean implements Serializable {
 		return "login?faces-redirect=true";
 	}
 
-	public String deslogar() {
+	public String logoff() {
 		context.getExternalContext().getSessionMap().remove("loggedUser");
 		return "login?faces-redirect=true";
+	}
+	
+	public static User getLoggedUser() {
+		return (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("loggedUser");
 	}
 }

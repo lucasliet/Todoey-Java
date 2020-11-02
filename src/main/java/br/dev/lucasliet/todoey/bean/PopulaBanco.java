@@ -45,6 +45,7 @@ public class PopulaBanco implements Serializable {
 		return user;
 	}
 
+	@SuppressWarnings("unused")
 	private static Calendar parseData(String data) {
 		try {
 			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);

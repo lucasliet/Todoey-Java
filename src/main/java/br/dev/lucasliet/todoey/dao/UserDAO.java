@@ -1,7 +1,9 @@
 package br.dev.lucasliet.todoey.dao;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -16,9 +18,15 @@ public class UserDAO implements Serializable {
 
 	@PersistenceContext
 	EntityManager manager;
+	
+	private GenericDAO<User> dao;
+	
+	@PostConstruct
+	void init() {
+		this.dao = new GenericDAO<User>(this.manager, User.class);
+	}
 
-	public boolean exist(User user) {
-
+	public User retrieveUser(User user) {
 		TypedQuery<User> query = manager.createQuery(
 				" select u from User u "
 			  + " where u.email = :pEmail and u.password = :pPassword",
@@ -27,13 +35,14 @@ public class UserDAO implements Serializable {
 		query.setParameter("pEmail", user.getEmail());
 		query.setParameter("pPassword", user.getPassword());
 		try {
-			@SuppressWarnings("unused")
-			User result = query.getSingleResult();
+			return query.getSingleResult();
 		} catch (NoResultException ex) {
-			return false;
+			return null;
 		}
-
-		return true;
+	}
+	
+	public List<User> findAll(){
+		return dao.findAll();
 	}
 
 }
