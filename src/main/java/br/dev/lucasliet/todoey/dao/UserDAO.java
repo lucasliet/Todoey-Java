@@ -8,7 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import br.dev.lucasliet.todoey.model.UserLogin;
+import br.dev.lucasliet.todoey.model.User;
 
 @Stateless
 @SuppressWarnings("serial")
@@ -17,18 +17,18 @@ public class UserDAO implements Serializable {
 	@PersistenceContext
 	EntityManager manager;
 
-	public boolean exist(UserLogin user) {
+	public boolean exist(User user) {
 
-		TypedQuery<UserLogin> query = manager.createQuery(
-				" select u from UserLogin u "
+		TypedQuery<User> query = manager.createQuery(
+				" select u from User u "
 			  + " where u.email = :pEmail and u.password = :pPassword",
-				UserLogin.class);
+				User.class);
 
 		query.setParameter("pEmail", user.getEmail());
 		query.setParameter("pPassword", user.getPassword());
 		try {
 			@SuppressWarnings("unused")
-			UserLogin result = query.getSingleResult();
+			User result = query.getSingleResult();
 		} catch (NoResultException ex) {
 			return false;
 		}

@@ -8,10 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "reminders")
 public class Reminder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,16 +22,18 @@ public class Reminder implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
+	@NotNull
 	private String title;
 	
+	@NotNull
 	private String body;
 	
 	@Temporal(TemporalType.DATE)
 	private Calendar lastModified = Calendar.getInstance();
 	
 	@ManyToOne
-	private UserLogin user;
+	private User user;
 
 	public Reminder() {
 	}
@@ -57,11 +62,11 @@ public class Reminder implements Serializable {
 		this.lastModified = lastModified;
 	}
 
-	public UserLogin getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(UserLogin user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

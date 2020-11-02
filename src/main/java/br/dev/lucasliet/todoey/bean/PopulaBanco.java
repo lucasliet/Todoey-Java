@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.dev.lucasliet.todoey.model.Reminder;
-import br.dev.lucasliet.todoey.model.UserLogin;
+import br.dev.lucasliet.todoey.model.User;
 
 @Stateless
 @Named
@@ -23,14 +23,14 @@ public class PopulaBanco implements Serializable {
 	EntityManager em;
 
 	public void init() {
-		UserLogin user = generateUser();
+		User user = generateUser();
 		em.persist(user);
 		
 		Reminder reminder = generateReminder(user);
 		em.persist(reminder);
 	}
 
-	private static Reminder generateReminder(UserLogin user) {
+	private static Reminder generateReminder(User user) {
 		Reminder reminder = new Reminder();
 		reminder.setTitle("First Reminder");
 		reminder.setBody("Test");
@@ -38,8 +38,8 @@ public class PopulaBanco implements Serializable {
 		return reminder;
 	}
 
-	private static UserLogin generateUser() {
-		UserLogin user = new UserLogin();
+	private static User generateUser() {
+		User user = new User();
 		user.setEmail("lucasliet@test.com");
 		user.setPassword("123");
 		return user;

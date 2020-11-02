@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.dev.lucasliet.todoey.dao.UserDAO;
-import br.dev.lucasliet.todoey.model.UserLogin;
+import br.dev.lucasliet.todoey.model.User;
 
 @Named
 @ViewScoped
@@ -17,7 +17,7 @@ public class LoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private UserLogin user = new UserLogin();
+	private User user = new User();
 
 	@Inject
 	UserDAO userDAO;
@@ -25,7 +25,7 @@ public class LoginBean implements Serializable {
 	@Inject
 	FacesContext context;
 	
-	public UserLogin getUser() {
+	public User getUser() {
 		return user;
 	}
 

@@ -8,7 +8,7 @@
 
 		<jta-data-source>java:/TodoeyDS</jta-data-source>
 
-		<class>br.dev.lucasliet.todoey.model.UserLogin</class>
+		<class>br.dev.lucasliet.todoey.model.User</class>
 		<class>br.dev.lucasliet.todoey.model.Reminder</class>
 
 		<properties>
