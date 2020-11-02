@@ -7,10 +7,11 @@ import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -37,11 +38,9 @@ public class TodoeyREST {
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
     public Reminder lookupMemberById(@PathParam("id") int id) {
-        Reminder member = reminderDAO.findById(id);
-        if (member == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        return member;
+        Reminder reminder = reminderDAO.findById(id);
+        checkIfExists(reminder);
+        return reminder;
     }
 
     @POST
@@ -52,16 +51,10 @@ public class TodoeyREST {
         Response.ResponseBuilder builder = null;
 
         try {
-            // Validates member using bean validation
-
             reminderDAO.add(reminder);
 
-            // Create an "ok" response
             builder = Response.ok();
-        } catch (ConstraintViolationException ce) {
-            // Handle bean validation issues
         } catch (Exception e) {
-            // Handle generic exceptions
             Map<String, String> responseObj = new HashMap<>();
             responseObj.put("error", e.getMessage());
             builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
@@ -69,5 +62,42 @@ public class TodoeyREST {
 
         return builder.build();
     }
+    
+    @DELETE
+    @Path("/{id:[0-9][0-9]*}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteReminder(@PathParam("id") int id) {
+        Reminder reminder = reminderDAO.findById(id);
+        checkIfExists(reminder);
+        
+        reminderDAO.remove(reminder);
+        
+        return Response.ok().build();
+    }
+    
+    @PUT
+    @Path("/(id:[0-9][0-9]*}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateReminder(@PathParam("id") int id) {
+    	Reminder reminder = reminderDAO.findById(id);
+    	checkIfExists(reminder);
+    	
+    	try {
+    		reminderDAO.update(reminder);
+    	} catch (Exception e) {
+    		Map<String, String> responseObj = new HashMap<>();
+            responseObj.put("error", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(responseObj).build();
+        }
+    	return Response.ok().entity(reminder).build();
+        	
+    }
+
+	private void checkIfExists(Reminder reminder) {
+		if (reminder == null)
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+	}
 
 }
