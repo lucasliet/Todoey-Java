@@ -7,19 +7,21 @@
 
 <h:head>
 	<link rel="stylesheet"
-		href="#{request.contextPath}/resources/css/style.css"></link>
-		<title>Todoey</title>
+		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+	<h:outputStylesheet library="css" name="style.css?rnd=13" />
+	<title>Todoey</title>
 </h:head>
 <h:body>
 	<header id="cabecalho">
-		<div class="logo">
-			<h1>Todoey</h1>
-		</div>
+
+		<h1 class="logo">Todoey</h1>
 		<nav>
 			<p:commandButton value="Popula Banco de Dados"
 				action="#{populaBanco.init}" process="@this" />
 			<h:form rendered="#{loggedUser != null}">
-				<p:themeSwitcher id="basic" style="width:165px; margin-left:.5rem; margin-right:.5rem"
+				<p:themeSwitcher id="basic"
+					style="width:165px; margin-left:.5rem; margin-right:.5rem"
 					value="#{themeBean.theme}">
 					<f:selectItem itemLabel="Choose Theme" itemValue="" />
 					<f:selectItems value="#{themeBean.themes}" var="theme"
@@ -46,10 +48,12 @@
 		<ui:insert name="titulo"></ui:insert>
 	</h1>
 
-	<main id="conteudo">
+	<main id="conteudo" class="container row justify-content-center">
 		<ui:insert name="conteudo">
 		</ui:insert>
 	</main>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </h:body>
 
 </html>
