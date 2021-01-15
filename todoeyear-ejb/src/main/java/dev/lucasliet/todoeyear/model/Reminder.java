@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "reminders")
@@ -34,6 +33,9 @@ public class Reminder implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	private Calendar lastModified = Calendar.getInstance();
+	
+	@Temporal(TemporalType.DATE)
+	private Calendar deadline;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id", nullable=false)
@@ -64,6 +66,14 @@ public class Reminder implements Serializable {
 
 	public void setLastModified(Calendar lastModified) {
 		this.lastModified = lastModified;
+	}
+	
+	public Calendar getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Calendar deadline) {
+		this.deadline = deadline;
 	}
 
 	public User getUser() {

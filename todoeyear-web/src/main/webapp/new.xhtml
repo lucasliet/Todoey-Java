@@ -26,23 +26,35 @@
 
 			<fieldset class="row card">
 
-				<div class="col s12 input-field">
-
+				<div class="col s6 input-field">
 					<input type="text" class="" id="reminder_title"
-						jsf:value="#{reminderBean.reminder.title}" required="true" />
-					<label for="reminder_title">Título</label>
+						jsf:value="#{reminderBean.reminder.title}" required="true" /> <label
+						for="reminder_title">Título</label>
+				</div>
+
+				<div class="col s6 input-field">
+					<input type="date" class="datepicker" id="reminder_deadline"
+						jsf:value="#{reminderBean.deadline}" required="true" />
+					<label for="reminder_deadline">Deadline</label>
 				</div>
 
 				<div class="col s12 input-field">
 					<textarea class="materialize-textarea" id="reminder_body"
 						jsf:value="#{reminderBean.reminder.body}" required="true"></textarea>
 					<label for="reminder_body">Mensagem</label>
-				</div> 
+				</div>
 
 			</fieldset>
 
 			<button jsf:action="#{reminderBean.save}">Gravar Lembrete</button>
 		</form>
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const elems = document.querySelectorAll('.datepicker');
+				const options = {format: 'yyyy-mm-dd'}
+				const instances = M.Datepicker.init(elems, options);
+			});
+		</script>
 	</ui:define>
 
 </ui:composition>
