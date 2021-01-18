@@ -1,4 +1,4 @@
-package dev.lucasliet.todoeyear.controller;
+package dev.lucasliet.todoeyear.bean;
 
 import java.io.Serializable;
 import java.text.ParseException;

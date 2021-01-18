@@ -1,6 +1,10 @@
 @import	url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
+html, body {
+	height: 100%;
+}
+
 body {
 	background: linear-gradient(96.17deg, #3BB5D4 0%, #31CFE8 92.95%) !important;
 	background-image:
@@ -8,10 +12,20 @@ body {
 	background-attachment: fixed !important;
 	background-size: cover !important;
 	font-family: 'Ubuntu', cursive;	
+	display: flex;
+	flex-direction: column;
+}
+
+main {
+	display: flex !important;
+	flex-direction: column;
+	align-items: center;
+	flex: 1;
 }
 
 h1,h2,h3,h4,h5 {
 	color: white;
+	font-weight: bold;
 }
 
 .logo {
@@ -29,4 +43,16 @@ nav {
 
 .title {
 	text-align: center;
+}
+
+.new-reminder-form {
+	height: 100%;
+	border-radius: 50px 50px 0 0;
+	max-width: 800px;
+	background-color: white;
+	padding: 1rem;
+}
+
+.btn-block {
+	width: 100%;
 }

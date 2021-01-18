@@ -3,23 +3,24 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-	<h:outputStylesheet library="css" name="style.css?rnd=130" />
+	<h:outputStylesheet library="css" name="style.css?rnd=902" />
 	<title>Todoey</title>
 </h:head>
 <h:body>
 	<header id="cabecalho">
 
 		<h1 class="logo">Todoey</h1>
-		<nav>
-			<p:commandButton value="Popula Banco de Dados"
-				action="#{populaBanco.init}" process="@this" />
-			<h:form rendered="#{loggedUser != null}">
+		<div style="display: flex; justify-content: flex-end;">
+			<button jsf:action="#{populaBanco.init}" class="waves-effect waves-light blue lighten-2 btn">Popula Banco de Dados</button>
+			<!-- <h:form rendered="#{loggedUser != null}">
 				<p:themeSwitcher id="basic"
 					style="width:165px; margin-left:.5rem; margin-right:.5rem"
 					value="#{themeBean.theme}">
@@ -29,7 +30,7 @@
 					<f:ajax />
 				</p:themeSwitcher>
 			</h:form>
-
+			-->
 			<p:growl id="messages" showDetail="true" autoUpdate="true" />
 
 			<h:form rendered="#{loggedUser != null}">
@@ -40,15 +41,15 @@
 					<p:menuitem value="Logout" action="#{loginBean.logoff}"
 						icon="fa fa-fw fa-sign-out" />
 				</p:menuButton>
-			</h:form>
-		</nav>
+			</h:form> 
+		</div>
 	</header>
 
-	<h1 class="title">
+	<h3 class="title">
 		<ui:insert name="titulo"></ui:insert>
-	</h1>
+	</h3>
 
-	<main id="conteudo" class="container row justify-content-center">
+	<main id="conteudo" class="container">
 		<ui:insert name="conteudo">
 		</ui:insert>
 	</main>

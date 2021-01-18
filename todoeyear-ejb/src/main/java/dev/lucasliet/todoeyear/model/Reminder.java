@@ -92,4 +92,10 @@ public class Reminder implements Serializable {
 		return body;
 	}
 
+	@Override
+	public String toString() {
+		return "Reminder [id=" + id + ", title=" + title + ", body=" + body + ", lastModified=" + lastModified
+				+ ", deadline=" + deadline + ", user=" + user + "]";
+	}
+
 }
