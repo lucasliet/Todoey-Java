@@ -5,11 +5,9 @@ require 'capybara/rspec/matchers'
 
 require 'selenium-webdriver'
 require 'site_prism'
-require_relative 'page_helper.rb'
 
 World(Capybara::DSL)
 World(Capybara::RSpecMatchers)
-World(PageObjects)
 
 BROWSER = ENV['BROWSER']
 AMBIENTE = ENV['AMBIENTE']
