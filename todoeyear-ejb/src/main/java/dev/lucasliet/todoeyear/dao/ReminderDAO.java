@@ -2,6 +2,7 @@ package dev.lucasliet.todoeyear.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -40,7 +41,10 @@ public class ReminderDAO implements Serializable {
 	}
 
 	public List<Reminder> findAll() {
-		return dao.findAll();
+		List<Reminder> sortedList = dao.findAll().stream()
+				.sorted((reminder1, reminder2) -> reminder1.getId().compareTo(reminder2.getId()))
+				.collect(Collectors.toList());
+		return sortedList;
 	}
 
 	public Reminder findById(Integer id) {

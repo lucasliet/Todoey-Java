@@ -14,74 +14,50 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-	
-		<form jsf:id="formTabelareminders" class="curved-white-body">
-			<ui:repeat value="#{reminderBean.reminders}" var="reminder" >
-				<div class="card">
-					<div class="card-title">
-						<h5 class="card-title-text">#{reminder.title}</h5>
-					</div>
-					<div class="card-body">
-						<span class="crop-text-2 card-body-text">
-							 Tem que tá pronto até lá! 🤕 
-						</span>
-						<div class="d-flex justify-content-between align-items-center">
-							<div class="d-flex flex-column">
-								<label class="m-0">Deadline:</label>
-								<p class="m-0">Thu 11/26/2020</p>
-							</div>
-							<div>
-								<i-feather name="edit-2" >
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-edit-2">
-		    							<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-									</svg>
-								</i-feather>
-								<i-feather name="trash-2" class="ml-2" _nghost-iah-c22="">
-									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-trash-2">
-	    								<polyline points="3 6 5 6 21 6"></polyline>
-	    								<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line>
-									</svg>
-								</i-feather>
+		<h:form id="formTabelaReminders" prependId="false" styleClass="curved-white-body reminders-list">
+			<table>			
+				<ui:repeat value="#{reminderBean.reminders}" var="reminder">
+					<div class="card-reminder">
+						<div class="card-title">
+							<h5 class="card-title-text">#{reminder.title}</h5>
+						</div>
+						<div class="card-body">
+							<span class="card-body-text">
+								#{reminder.body}
+							</span>
+							<div class="card-footer">
+								<div class="deadline-data">
+									<label>Deadline:</label>
+									<p>
+										<h:outputText value="#{reminder.deadline.time}" >
+									    	<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</p>
+								</div>
+								<div class="edit-delete-icons">
+									<h:commandLink styleClass="col s1 black-text" action="#{reminderBean.show(reminder)}">
+										<i name="edit-2">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				    							<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+											</svg>
+										</i>
+									</h:commandLink>
+									<h:commandLink styleClass="col s1 black-text" action="#{reminderBean.remove(reminder)}">
+										<i name="trash-2" class="col s1">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+			    								<polyline points="3 6 5 6 21 6"></polyline>
+			    								<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line>
+											</svg>
+										</i>
+									</h:commandLink>								
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</ui:repeat>			
-		</form>
-
-		<!-- 
-		<h:form id="formTabelareminders">
-			<p:dataTable value="#{reminderBean.reminders}" var="reminder"
-				id="tabelareminders" paginator="true" rows="5">
-				<f:facet name="header">reminders</f:facet>
-				<p:column headerText="Título" sortBy="#{reminder.title}"
-					filterBy="#{reminder.title}" filterMatchMode="startsWith">
-					<h:outputText value="#{reminder.title}" />
-				</p:column>
-				<p:column headerText="Mensagem" sortBy="#{reminder.body}">
-					<h:outputText value="#{reminder.body}" />
-				</p:column>
-				<p:column headerText="Data" sortBy="#{reminder.lastModified}">
-					<h:outputText value="#{reminder.lastModified.time}">
-						<f:convertDateTime pattern="dd/MM/yyyy"
-							timeZone="America/Sao_Paulo" />
-					</h:outputText>
-				</p:column>
-
-				<p:column headerText="Alterar">
-					<p:commandButton 
-						value="alterar" actionListener="#{reminderBean.show(reminder)}"
-						icon="fa fa-fw fa-edit" />
-				</p:column>
-
-				<p:column headerText="Remover">
-					<p:commandButton 
-						actionListener="#{reminderBean.remove(reminder)}"
-						icon="fa fa-fw fa-remove" />
-				</p:column>
-			</p:dataTable>
-		</h:form>
-		-->
+				</ui:repeat>
+			</table>
+		</h:form>		
+		
 	</ui:define>
 </ui:composition>
 

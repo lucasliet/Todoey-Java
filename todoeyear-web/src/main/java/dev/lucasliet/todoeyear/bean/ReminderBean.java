@@ -36,13 +36,6 @@ public class ReminderBean implements Serializable {
 	@Inject
 	FacesContext context;
 	
-	@PostConstruct
-	void init() {
-		if (this.reminder.getId() != null) {
-			this.deadline = ParseCalendar.calendarToString(reminder.getDeadline());
-		}
-	}
-	
 	public String getDeadline() {
 		return this.deadline;
 	}
@@ -64,10 +57,12 @@ public class ReminderBean implements Serializable {
 
 	public void findById() {
 		this.reminder = reminderDAO.findById(this.reminder.getId());
+		if(this.reminder.getDeadline() != null)
+			this.deadline = ParseCalendar.calendarToString(reminder.getDeadline());
 	}
 
 	@Transactional
-	public void save() {
+	public String save() {
 		this.reminder.setDeadline(ParseCalendar.stringToCalendar(deadline));
 		if (this.reminder.getId() == null) {
 			reminderDAO.add(this.reminder);
@@ -77,15 +72,17 @@ public class ReminderBean implements Serializable {
 		}
 		System.out.println(reminder);
 		this.reminder = new Reminder();
+		return "home?faces-redirect=true";
 	}
 
 	@Transactional
-	public void remove(Reminder reminder) {
+	public String remove(Reminder reminder) {
 		reminderDAO.remove(reminder);
 		this.reminders = reminderDAO.findAll();
+		return "home?face-redirect=true";
 	}
 
-	public void show(Reminder reminder) {
-		this.reminder = this.reminderDAO.findById(reminder.getId());
+	public String show(Reminder reminder) {
+		return "new?faces-redirect=true&reminderId="+reminder.getId();
 	}
 }
