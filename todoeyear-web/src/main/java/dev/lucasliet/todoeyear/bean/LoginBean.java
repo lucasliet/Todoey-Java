@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import dev.lucasliet.todoeyear.dao.UserDAO;
 import dev.lucasliet.todoeyear.model.User;
@@ -18,6 +19,9 @@ public class LoginBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private User user = new User();
+	
+	private final String LOGIN_PAGE = "login?faces-redirect=true";
+	private final String HOME_PAGE  = "home?faces-redirect=true";
 
 	@Inject
 	UserDAO userDAO;
@@ -34,18 +38,24 @@ public class LoginBean implements Serializable {
 		if (this.user != null) {
 			context.getExternalContext().getSessionMap()
 					.put("loggedUser", this.user);
-			return "home?faces-redirect=true";
+			return HOME_PAGE;
 		}
 
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		context.addMessage(null, new FacesMessage("User not found"));
 
-		return "login?faces-redirect=true";
+		return LOGIN_PAGE;
+	}
+	
+	@Transactional
+	public String singUp() {
+		this.userDAO.register(user);
+		return LOGIN_PAGE;
 	}
 
 	public String logoff() {
 		context.getExternalContext().getSessionMap().remove("loggedUser");
-		return "login?faces-redirect=true";
+		return LOGIN_PAGE;
 	}
 	
 }

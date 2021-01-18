@@ -16,6 +16,10 @@ body {
 	flex-direction: column;
 }
 
+fieldset {
+	border: none;
+}
+
 main {
 	display: flex !important;
 	flex-direction: column;

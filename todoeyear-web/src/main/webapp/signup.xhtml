@@ -10,14 +10,14 @@
 	<ui:composition template="_template.xhtml">
 
 		<ui:define name="titulo">
-				<p:outputPanel>Login</p:outputPanel>
+				<p:outputPanel>Cadastro</p:outputPanel>
 		</ui:define>
 
 		<ui:define name="conteudo">
 		
 			<p:messages globalOnly="true" />
 		
-			<h:form id="login" styleClass="curved-white-body">
+			<h:form id="signup" styleClass="curved-white-body">
 				
 				<fieldset class="row">
 					<div class="col s12 input-field">
@@ -31,13 +31,9 @@
 							<label for="senha">Senha</label>
 					</div>
 
-					<button jsf:action="#{loginBean.login}" class="waves-effect waves-light blue lighten-2 btn btn-block">
-						Login
-					</button>
-					<a jsf:action="signup.xhtml?face-redirect=true" class="waves-effect waves-light white blue-text btn btn-block">
-						Cadastro
-					</a>
-										
+					<button jsf:action="#{loginBean.singUp}" class="waves-effect waves-light blue lighten-2 btn btn-block">
+						Cadastre-se
+					</button>					
 				</fieldset>
 			</h:form>
 		</ui:define>

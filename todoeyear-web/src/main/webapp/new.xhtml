@@ -27,7 +27,7 @@
 			<fieldset class="row" style="border: none;">
 
 				<div class="col s6 input-field">
-					<input type="text" class="" id="reminder_title"
+					<input type="text" id="reminder_title"
 						jsf:value="#{reminderBean.reminder.title}" required="true" /> <label
 						for="reminder_title">Título</label>
 				</div>
@@ -46,7 +46,9 @@
 
 			</fieldset>
 
-			<button jsf:action="#{reminderBean.save}" class="waves-effect waves-light blue lighten-2 btn btn-block">Gravar Lembrete</button>
+			<button jsf:action="#{reminderBean.save}" class="waves-effect waves-light blue lighten-2 btn btn-block">
+				Gravar Lembrete
+			</button>
 		</form>
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {

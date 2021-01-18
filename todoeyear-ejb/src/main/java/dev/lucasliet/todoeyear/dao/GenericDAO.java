@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
 
 @SuppressWarnings("serial")
 public class GenericDAO<T> implements Serializable {
@@ -32,6 +35,17 @@ public class GenericDAO<T> implements Serializable {
 	public List<T> findAll() {
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classType);
 		query.select(query.from(classType));
+
+		List<T> list = em.createQuery(query).getResultList();
+
+		return list;
+	}
+	
+	public <any> List<T> findAll(String expression1, any expression2) {
+		var criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<T> query = criteriaBuilder.createQuery(classType);
+		Root<T> root = query.from(classType);
+		query.select(root).where(criteriaBuilder.equal(root.get(expression1), expression2));
 
 		List<T> list = em.createQuery(query).getResultList();
 

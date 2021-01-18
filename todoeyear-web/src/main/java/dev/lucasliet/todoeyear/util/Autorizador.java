@@ -18,16 +18,14 @@ public class Autorizador implements PhaseListener {
 		FacesContext context = evento.getFacesContext();
 		String pageName = context.getViewRoot().getViewId();
 
-		if ("/login.xhtml".equals(pageName)) {
-			return;
-		}
+		if ("/login.xhtml".equals(pageName)) return;
+		
+		if ("/signup.xhtml".equals(pageName)) return;
 
 		User loggedUser = (User) context.getExternalContext()
 				.getSessionMap().get("loggedUser");
 
-		if (loggedUser != null) {
-			return;
-		}
+		if (loggedUser != null) return;
 
 		NavigationHandler handler = context.getApplication()
 				.getNavigationHandler();
