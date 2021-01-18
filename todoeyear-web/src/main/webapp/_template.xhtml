@@ -11,7 +11,7 @@
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-	<h:outputStylesheet library="css" name="style.css?rnd=902" />
+	<h:outputStylesheet library="css" name="style.css?rnd=903" />
 	<title>Todoey</title>
 </h:head>
 <h:body>
@@ -19,7 +19,7 @@
 
 		<h1 class="logo">Todoey</h1>
 		<div style="display: flex; justify-content: flex-end;">
-			<button jsf:action="#{populaBanco.init}" class="waves-effect waves-light blue lighten-2 btn">Popula Banco de Dados</button>
+			<h:commandButton action="#{populaBanco.init}" styleClass="white-text waves-effect waves-light blue lighten-2 btn" value="Popula Banco"/>
 			<!-- <h:form rendered="#{loggedUser != null}">
 				<p:themeSwitcher id="basic"
 					style="width:165px; margin-left:.5rem; margin-right:.5rem"
@@ -35,7 +35,10 @@
 
 			<h:form rendered="#{loggedUser != null}">
 				<p:menuButton value="Menu">
-					<p:menuitem value="Home" action="todoey?faces-redirect=true"
+					<p:menuitem value="Home" action="home?faces-redirect=true"
+						icon="fa fa-fw fa-pencil-square-o" />
+					<p:separator />
+					<p:menuitem value="New" action="new?faces-redirect=true"
 						icon="fa fa-fw fa-pencil-square-o" />
 					<p:separator />
 					<p:menuitem value="Logout" action="#{loginBean.logoff}"
