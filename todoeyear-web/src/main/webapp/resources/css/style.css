@@ -45,12 +45,15 @@ nav {
 	text-align: center;
 }
 
-.new-reminder-form {
+.curved-white-body {
 	height: 100%;
 	border-radius: 50px 50px 0 0;
-	max-width: 800px;
 	background-color: white;
 	padding: 1rem;
+}
+
+.w-800 {
+	max-width: 800px;
 }
 
 .btn-block {
