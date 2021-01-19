@@ -108,7 +108,7 @@ DEPENDENCIES
   capybara
   cucumber
   rspec
-  selenium-webdriver (= 3.141.0)
+  selenium-webdriver
   site_prism (= 2.13)
 
 BUNDLED WITH

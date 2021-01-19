@@ -1,13 +1,8 @@
 Então('checo se estou na página de login.') do
-  expect(page).to have_current_path('http://localhost:8080/todoeyear-web/login.xhtml')
+  expect(page).to have_current_path('/todoeyear-web/login.xhtml', ignore_query: true)
 end
 
 Quando('eu insiro e-mail e senha.') do
-  visit '/'
-  fill_in id: 'email', with: 'lucasliet@test.com'
-  fill_in id: 'senha', with: '123'
-end
-
-Então('clico para efetuar login.') do
-  find('#login-button').click
+  login_page.load
+  login_page.login 'lucasliet@test.com', '123'
 end

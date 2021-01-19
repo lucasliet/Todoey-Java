@@ -6,7 +6,6 @@ Funcionalidade: Manipular Lembretes.
 @login
 Cenário: logar com sucesso.
 Quando eu insiro e-mail e senha.
-Então clico para efetuar login.
 
 Cenário: Registrar Lembretes.
 Quando eu preencho os campos do formulário.

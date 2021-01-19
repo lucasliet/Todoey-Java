@@ -1,7 +1,9 @@
 class SignupPage < SitePrism::Page
+  set_url '/signup.xhtml'
+
   element :email, '#email'
   element :senha, '#senha'
-  element :signin_button, 'button[type=submit]'
+  element :signin_button, '#signup-button'
 
   def cadastrar _email, _senha
     email.set _email
