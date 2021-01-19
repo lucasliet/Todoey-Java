@@ -35,14 +35,14 @@
 									</p>
 								</div>
 								<div class="edit-delete-icons">
-									<h:commandLink styleClass="col s1 black-text" action="#{reminderBean.show(reminder)}">
+									<h:commandLink styleClass="col s1 black-text edit" action="#{reminderBean.show(reminder)}">
 										<i name="edit-2">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 				    							<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
 											</svg>
 										</i>
 									</h:commandLink>
-									<h:commandLink styleClass="col s1 black-text" action="#{reminderBean.remove(reminder)}">
+									<h:commandLink styleClass="col s1 black-text delete" action="#{reminderBean.remove(reminder)}">
 										<i name="trash-2" class="col s1">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 			    								<polyline points="3 6 5 6 21 6"></polyline>

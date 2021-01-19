@@ -41,14 +41,14 @@
 			<p:growl id="messages" showDetail="true" autoUpdate="true" />
 
 			<h:form rendered="#{loggedUser != null}">
-				<p:menuButton value="Menu">
+				<p:menuButton id="menu-button" value="Menu">
 					<p:menuitem value="Home" action="home?faces-redirect=true"
 						icon="fa fa-fw fa-pencil-square-o" />
 					<p:separator />
 					<p:menuitem value="New" action="new?faces-redirect=true"
 						icon="fa fa-fw fa-pencil-square-o" />
 					<p:separator />
-					<p:menuitem value="Logout" action="#{loginBean.logoff}"
+					<p:menuitem id="logout-button" value="Logout" action="#{loginBean.logoff}"
 						icon="fa fa-fw fa-sign-out" />
 				</p:menuButton>
 			</h:form> 
