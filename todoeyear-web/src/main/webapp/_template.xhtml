@@ -1,71 +1,67 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:jsf="http://xmlns.jcp.org/jsf"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-	  
-	<h:outputStylesheet library="css" name="style.css?rnd=922" />
-	
-	
-  	<link rel="icon" type="image/png" sizes="32x32" href="https://lucasliet.github.io/Todoey/assets/favicon-32x32.png"/>
-  	<link rel="icon" type="image/png" sizes="16x16" href="https://lucasliet.github.io/Todoey/assets/favicon-16x16.png"/>
-	
+	<h:outputStylesheet library="css" name="style.css?v=2" />
+
+	<link rel="icon" type="image/png" sizes="32x32" href="https://lucasliet.github.io/Todoey/assets/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="https://lucasliet.github.io/Todoey/assets/favicon-16x16.png" />
+
 	<title>Todoey</title>
 </h:head>
 <h:body>
 	<header id="cabecalho">
+		<h:form rendered="#{loggedUser != null}">
+			<h:commandLink id="logout-button" action="#{loginBean.logoff}">
+				<i class="material-icons white-text logout-button">exit_to_app</i>
+			</h:commandLink>
+		</h:form>
 
 		<h1 class="logo">Todoey</h1>
-		<div style="display: flex; justify-content: flex-end;">
-			<h:commandButton action="#{populaBanco.init}" styleClass="white-text waves-effect waves-light blue lighten-2 btn" value="Popula Banco"/>
-			<!-- <h:form rendered="#{loggedUser != null}">
-				<p:themeSwitcher id="basic"
-					style="width:165px; margin-left:.5rem; margin-right:.5rem"
-					value="#{themeBean.theme}">
-					<f:selectItem itemLabel="Choose Theme" itemValue="" />
-					<f:selectItems value="#{themeBean.themes}" var="theme"
-						itemLabel="#{theme}" itemValue="#{theme}" />
-					<f:ajax />
-				</p:themeSwitcher>
-			</h:form>
-			-->
-			<p:growl id="messages" showDetail="true" autoUpdate="true" />
 
-			<h:form rendered="#{loggedUser != null}">
-				<p:menuButton id="menu-button" value="Menu">
-					<p:menuitem value="Home" action="home?faces-redirect=true"
-						icon="fa fa-fw fa-pencil-square-o" />
-					<p:separator />
-					<p:menuitem value="New" action="new?faces-redirect=true"
-						icon="fa fa-fw fa-pencil-square-o" />
-					<p:separator />
-					<p:menuitem id="logout-button" value="Logout" action="#{loginBean.logoff}"
-						icon="fa fa-fw fa-sign-out" />
-				</p:menuButton>
-			</h:form> 
-		</div>
+		<h:form rendered="#{false}">
+			<div style="display: flex; justify-content: flex-end;">
+				<h:commandButton action="#{populaBanco.init}"
+					styleClass="white-text waves-effect waves-light blue lighten-2 btn" value="Popula Banco" />
+				<h:form rendered="#{false}">
+					<p:themeSwitcher id="basic" style="width:165px; margin-left:.5rem; margin-right:.5rem"
+						value="#{themeBean.theme}">
+						<f:selectItem itemLabel="Choose Theme" itemValue="" />
+						<f:selectItems value="#{themeBean.themes}" var="theme" itemLabel="#{theme}" itemValue="#{theme}" />
+						<f:ajax />
+					</p:themeSwitcher>
+				</h:form>
+
+				<p:growl id="messages" showDetail="true" autoUpdate="true" />
+
+				<h:form rendered="#{false}">
+					<p:menuButton id="menu-button" value="Menu">
+						<p:menuitem value="Home" action="home?faces-redirect=true" icon="fa fa-fw fa-pencil-square-o" />
+						<p:separator />
+						<p:menuitem value="New" action="new?faces-redirect=true" icon="fa fa-fw fa-pencil-square-o" />
+						<p:separator />
+						<p:menuitem id="logout-button" value="Logout" action="#{loginBean.logoff}" icon="fa fa-fw fa-sign-out" />
+					</p:menuButton>
+				</h:form>
+			</div>
+		</h:form>
 	</header>
 
-	<h3 class="title">
+	<!-- <h3 class="title">
 		<ui:insert name="titulo"></ui:insert>
-	</h3>
+	</h3> -->
 
 	<main id="conteudo">
 		<ui:insert name="conteudo">
 		</ui:insert>
 	</main>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </h:body>
 
