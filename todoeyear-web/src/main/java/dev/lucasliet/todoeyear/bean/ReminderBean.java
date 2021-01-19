@@ -50,7 +50,7 @@ public class ReminderBean implements Serializable {
 
 	public List<Reminder> getReminders() {
 		if (this.reminders == null) {
-			this.reminders = reminderDAO.findAll();
+			this.reminders = reminderDAO.findAllFromLoggedUser();
 		}
 		return this.reminders;
 	}
@@ -66,7 +66,7 @@ public class ReminderBean implements Serializable {
 		this.reminder.setDeadline(ParseCalendar.stringToCalendar(deadline));
 		if (this.reminder.getId() == null) {
 			reminderDAO.add(this.reminder);
-			this.reminders = reminderDAO.findAll();
+			this.reminders = reminderDAO.findAllFromLoggedUser();
 		} else {
 			reminderDAO.update(this.reminder);
 		}
@@ -78,7 +78,7 @@ public class ReminderBean implements Serializable {
 	@Transactional
 	public String remove(Reminder reminder) {
 		reminderDAO.remove(reminder);
-		this.reminders = reminderDAO.findAll();
+		this.reminders = reminderDAO.findAllFromLoggedUser();
 		return "home?face-redirect=true";
 	}
 
