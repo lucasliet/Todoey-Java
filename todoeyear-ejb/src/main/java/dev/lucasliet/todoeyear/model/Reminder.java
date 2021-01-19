@@ -14,9 +14,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "reminders")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Reminder implements Serializable, Comparable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,13 +38,16 @@ public class Reminder implements Serializable, Comparable {
 	private String body;
 	
 	@Temporal(TemporalType.DATE)
+	@XmlElement(name = "lastModified")
 	private Calendar lastModified = Calendar.getInstance();
 	
 	@Temporal(TemporalType.DATE)
+	@XmlElement(name = "deadline")
 	private Calendar deadline;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id", nullable=false)
+	@XmlElement(name = "user")
 	private User user;
 
 	public Reminder() {
