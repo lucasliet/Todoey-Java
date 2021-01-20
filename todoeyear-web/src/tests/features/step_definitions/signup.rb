@@ -1,4 +1,11 @@
-Quando('clico para cadastrar.') do
+Quando('insiro os dados e clico em cadastrar.') do
   signup_page.load
-  signup_page.cadastrar "usuario#{rand *100000}@test.com", '123'
+  @random_user = "usuario#{rand *100000}@test.com"
+  signup_page.cadastrar @random_user, '123'
+end
+
+Quando('logo com usuário criado aleatóriamente.') do
+  login_page.load
+  login_page.login @random_user, '123'
+  expect(page).to have_current_path('/todoeyear-web/home.xhtml', ignore_query: true)
 end

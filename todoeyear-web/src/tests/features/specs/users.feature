@@ -4,16 +4,17 @@
 Funcionalidade: logar no site.
 
 @login
-Cenário: logar com sucesso.
-Quando eu insiro e-mail e senha.
+Cenário: Logar com sucesso.
+Quando eu insiro os dados e clico em logar.
+Então checo se estou na página home.
 
 @logout
-Cenário: deslogar com sucesso.
+Cenário: Deslogar com sucesso.
 Quando eu clico no botão de logout.
 Então checo se estou na página de login.
 
 @signup
 Cenário: Cadastrar com sucesso.
-Quando eu insiro e-mail e senha.
-E clico para cadastrar.
-Então checo se estou na página de login.
+Quando insiro os dados e clico em cadastrar.
+E logo com usuário criado aleatóriamente.
+Então checo se estou na página home.

@@ -1,15 +1,18 @@
 Quando('eu preencho os campos do formulário.') do
-  new_page.load
+  home_page.new_page_button.click
   new_page.register_reminder 'Reminder Capybara', '29/01/2021', 'Lembrete inserido através da automação Capybara'
 end
 
 Então('eu checo se o lembrete foi registrado com sucesso.') do
-  home_page.load
   page.has_text? 'Lembrete inserido através da automação Capybara'
 end
 
 Quando('eu clico em editar um lembrete.') do
   all('.col.s1.black-text.edit').last.click
+end
+
+Quando('eu clico em editar um lembrete por dois cliques.') do
+  home_page.reminders_list.last.double_click
 end
 
 Quando('Preencho os campos do formulário.') do
@@ -22,7 +25,6 @@ Então('eu checo se os dados foram alterados com sucesso.') do
 end
 
 Quando('eu clico em deletar um lembrete.') do
-  home_page.load
   @total_reminders_before_delete = home_page.reminders_list.size
   all('.col.s1.black-text.delete').last.click
   @total_reminders_after_delete = home_page.reminders_list.size
