@@ -1,7 +1,6 @@
 package dev.lucasliet.todoeyear.rest;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,37 +30,28 @@ public class ReminderResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Reminder> listAllMembers() {
+    public List<Reminder> listAllReminders() {
         return reminderDAO.findAll();
     }
 
     @GET
     @Path("/{id:[0-9][0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Reminder lookupMemberById(@PathParam("id") int id) {
-        Reminder reminder = reminderDAO.findById(id);
-        checkIfExists(reminder);
-        return reminder;
+    public Reminder findReminderById(@PathParam("id") int id) {
+        return returnReminderIfExists(id);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createReminder(Reminder reminder) {
-
-        Response.ResponseBuilder builder = null;
-
         try {
             reminderDAO.add(reminder);
 
-            builder = Response.ok();
+            return Response.ok().build();
         } catch (Exception e) {
-            Map<String, String> responseObj = new HashMap<>();
-            responseObj.put("error", e.getMessage());
-            builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+            return handleException(e);
         }
-
-        return builder.build();
     }
     
     @DELETE
@@ -69,8 +59,7 @@ public class ReminderResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteReminder(@PathParam("id") int id) {
-        Reminder reminder = reminderDAO.findById(id);
-        checkIfExists(reminder);
+        var reminder = returnReminderIfExists(id);
         
         reminderDAO.remove(reminder);
         
@@ -82,23 +71,32 @@ public class ReminderResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateReminder(@PathParam("id") int id) {
-    	Reminder reminder = reminderDAO.findById(id);
-    	checkIfExists(reminder);
+    	var reminder = returnReminderIfExists(id);
     	
     	try {
     		reminderDAO.update(reminder);
     	} catch (Exception e) {
-    		Map<String, String> responseObj = new HashMap<>();
-            responseObj.put("error", e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(responseObj).build();
-        }
-    	return Response.ok().entity(reminder).build();
+    		return handleException(e);
+    	}
+    	
+    	return Response.ok().entity(reminder).header("Allow", "PUT").build();
         	
     }
 
-	private void checkIfExists(Reminder reminder) {
-		if (reminder == null)
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+	private Reminder returnReminderIfExists(Integer id) {
+		var reminder = reminderDAO.findById(id);
+		
+		if(reminder == null) throw new WebApplicationException("Reminder not found!",Response.Status.NOT_FOUND);
+		
+		return reminder;
+	}
+	
+	private Response handleException(Exception e) {
+		var responseObj = Map.of("error", e.getMessage().split(":")[1].trim());
+        
+		var builder = Response.status(Response.Status.BAD_REQUEST).entity(responseObj);
+        
+		return builder.build();
 	}
 
 }

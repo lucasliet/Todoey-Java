@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import dev.lucasliet.todoeyear.model.Reminder;
@@ -21,13 +23,20 @@ public class ReminderDAO implements Serializable {
 
 	private GenericDAO<Reminder> dao;
 	
+	@Inject
+	private UserDAO userDAO;
+	
 	@PostConstruct
 	void init() {
 		this.dao = new GenericDAO<Reminder>(this.manager, Reminder.class);
 	}
 
 	public void add(Reminder t) {
-		t.setUser(LoginUtil.getLoggedUser());
+		if (t.getUser() == null)
+			t.setUser(LoginUtil.getLoggedUser());
+		else
+			t.setUser(userDAO.findById(t.getUser().getId()));
+		if(t.getUser() == null) throw new NoResultException("User not Found");
 		dao.add(t);
 	}
 
@@ -36,7 +45,10 @@ public class ReminderDAO implements Serializable {
 	}
 
 	public void update(Reminder t) {
-		t.setUser(LoginUtil.getLoggedUser());
+		if (t.getUser() == null)
+			t.setUser(LoginUtil.getLoggedUser());
+		else
+			t.setUser(userDAO.findById(t.getUser().getId()));
 		dao.update(t);
 	}
 

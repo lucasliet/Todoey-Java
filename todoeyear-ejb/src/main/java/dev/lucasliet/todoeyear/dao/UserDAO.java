@@ -42,11 +42,15 @@ public class UserDAO implements Serializable {
 	}
 	
 	public void register(User user) {
-		this.dao.add(user);
+		dao.add(user);
 	}
 	
 	public List<User> findAll(){
 		return dao.findAll();
+	}
+	
+	public User findById(Integer id) {
+		return dao.findById(id);
 	}
 
 }
