@@ -1,8 +1,6 @@
 package dev.lucasliet.todoeyear.soap;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.jws.WebMethod;
@@ -30,32 +28,29 @@ public class Remindersws {
 	}
 
 	@WebMethod(operationName = "listReminder")
-	@WebResult(name = "reminders")
+	@WebResult(name = "reminder")
 	public Reminder getReminder(@WebParam(name = "id") Integer id) {
-		try {			
-			return reminderDAO.findById(id);
-		} catch (Exception e) {			
-			return null;
-		}
+		var reminder = reminderDAO.findById(id);
+		checkIfExists(reminder);
+		return reminder;
 	}
 
 	@WebMethod(operationName = "createReminder")
-	public Map<String, String> createReminder(@WebParam(name = "reminder") Reminder reminder) {
+	public String createReminder(@WebParam(name = "reminder") Reminder reminder) {
 		try {
 			reminderDAO.add(reminder);
-			return Map.of("Reminder Criado:", reminder.getTitle());
 		} catch (Exception e) {
-			Map<String, String> responseObj = new HashMap<>();
-			responseObj.put("error", e.getMessage());
-			return responseObj;
+			handleException(e);
 		}
+		return "Created Reminder: " + reminder.getTitle();
 	}
 	
 	@WebMethod(operationName = "deleteReminder")
-	public void deleteReminder(@WebParam(name = "id") Integer id) {
+	public String deleteReminder(@WebParam(name = "id") Integer id) {
 		var reminder = reminderDAO.findById(id);
         checkIfExists(reminder);
         reminderDAO.remove(reminder);
+        return "Reminder " + reminder.getTitle() + " deleted.";
 	}
 	
 	@WebMethod(operationName = "updateReminder")
@@ -66,14 +61,18 @@ public class Remindersws {
     	try {
     		reminderDAO.update(reminder);
     	} catch (Exception e) {
-            return null;
+			handleException(e);
         }
     	
     	return reminder;
 	}
 
 	private void checkIfExists(Reminder reminder){
-		if (reminder == null) throw new RuntimeException();
+		if (reminder == null) throw new RuntimeException("Reminder not found");
+	}
+	
+	private void handleException(Exception e) {
+		throw new RuntimeException(e.getMessage().split(":")[1].trim());
 	}
 
 }
@@ -82,7 +81,7 @@ public class Remindersws {
 @XmlAccessorType(XmlAccessType.FIELD)
 class ListReminders {
 
-	@XmlElement(name = "reminders")
+	@XmlElement(name = "reminder")
 	private List<Reminder> reminders;
 
 	public ListReminders(List<Reminder> reminders) {

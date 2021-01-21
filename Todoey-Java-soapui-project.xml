@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="45bc2e35-c210-4326-a1f8-601e1521398e" activeEnvironment="Default" name="Todoey Java" soapui-version="5.6.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="1b18899e-ee06-44f4-95a3-c999722b3093" wsaVersion="NONE" name="ReminderswsServiceSoapBinding" type="wsdl" bindingName="{http://soap.todoeyear.lucasliet.dev/}ReminderswsServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/todoeyear-web/Remindersws?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/todoeyear-web/Remindersws?wsdl"><con:part><con:url>http://localhost:8080/todoeyear-web/Remindersws?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ReminderswsService" targetNamespace="http://soap.todoeyear.lucasliet.dev/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://soap.todoeyear.lucasliet.dev/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://soap.todoeyear.lucasliet.dev/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="createReminder" type="tns:createReminder"/>
+      <xs:element name="createReminderResponse" type="tns:createReminderResponse"/>
+      <xs:element name="deleteReminder" type="tns:deleteReminder"/>
+      <xs:element name="deleteReminderResponse" type="tns:deleteReminderResponse"/>
+      <xs:element name="listAllReminders" type="tns:listAllReminders"/>
+      <xs:element name="listAllRemindersResponse" type="tns:listAllRemindersResponse"/>
+      <xs:element name="listReminder" type="tns:listReminder"/>
+      <xs:element name="listReminderResponse" type="tns:listReminderResponse"/>
+      <xs:element name="listReminders" type="tns:listReminders"/>
+      <xs:element name="reminder" type="tns:reminder"/>
+      <xs:element name="updateReminder" type="tns:updateReminder"/>
+      <xs:element name="updateReminderResponse" type="tns:updateReminderResponse"/>
+      <xs:complexType name="updateReminder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="reminder" type="tns:reminder"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="reminder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="title" type="xs:string"/>
+          <xs:element minOccurs="0" name="body" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastModified" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="deadline" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="user" type="tns:user"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="user">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+          <xs:element minOccurs="0" name="password" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="updateReminderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="return" type="tns:reminder"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteReminder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="deleteReminderResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="createReminder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="reminder" type="tns:reminder"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="createReminderResponse">
+        <xs:sequence>
+          <xs:element name="_return">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="key" type="xs:string"/>
+                      <xs:element minOccurs="0" name="value" type="xs:string"/>
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listReminder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listReminderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="reminders" type="tns:reminder"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listAllReminders">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="listAllRemindersResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="reminders" type="tns:listReminders"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="listReminders">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="reminders" type="tns:reminder"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="deleteReminderResponse">
+    <wsdl:part element="tns:deleteReminderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteReminder">
+    <wsdl:part element="tns:deleteReminder" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listReminder">
+    <wsdl:part element="tns:listReminder" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listAllReminders">
+    <wsdl:part element="tns:listAllReminders" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listAllRemindersResponse">
+    <wsdl:part element="tns:listAllRemindersResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateReminder">
+    <wsdl:part element="tns:updateReminder" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listReminderResponse">
+    <wsdl:part element="tns:listReminderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createReminderResponse">
+    <wsdl:part element="tns:createReminderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createReminder">
+    <wsdl:part element="tns:createReminder" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateReminderResponse">
+    <wsdl:part element="tns:updateReminderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Remindersws">
+    <wsdl:operation name="updateReminder">
+      <wsdl:input message="tns:updateReminder" name="updateReminder"></wsdl:input>
+      <wsdl:output message="tns:updateReminderResponse" name="updateReminderResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteReminder">
+      <wsdl:input message="tns:deleteReminder" name="deleteReminder"></wsdl:input>
+      <wsdl:output message="tns:deleteReminderResponse" name="deleteReminderResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createReminder">
+      <wsdl:input message="tns:createReminder" name="createReminder"></wsdl:input>
+      <wsdl:output message="tns:createReminderResponse" name="createReminderResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReminder">
+      <wsdl:input message="tns:listReminder" name="listReminder"></wsdl:input>
+      <wsdl:output message="tns:listReminderResponse" name="listReminderResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAllReminders">
+      <wsdl:input message="tns:listAllReminders" name="listAllReminders"></wsdl:input>
+      <wsdl:output message="tns:listAllRemindersResponse" name="listAllRemindersResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReminderswsServiceSoapBinding" type="tns:Remindersws">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateReminder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateReminder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateReminderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteReminder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteReminder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteReminderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createReminder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createReminder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createReminderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listReminder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listReminder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listReminderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listAllReminders">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listAllReminders">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listAllRemindersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReminderswsService">
+    <wsdl:port binding="tns:ReminderswsServiceSoapBinding" name="ReminderswsPort">
+      <soap:address location="http://localhost:8080/todoeyear-web/Remindersws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/todoeyear-web/Remindersws</con:endpoint></con:endpoints><con:operation id="352d63ee-5f37-4c60-b140-d4fa38e67401" isOneWay="false" action="" name="createReminder" bindingOperationName="createReminder" type="Request-Response" outputName="createReminderResponse" inputName="createReminder" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a096f501-429d-4381-96c2-b191c93867b6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/todoeyear-web/Remindersws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soap.todoeyear.lucasliet.dev/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:createReminder>
+         <reminder>
+            <title>Teste</title>
+            <body>Lembrete criado no SoapUI</body>
+            <deadline>2021-01-28</deadline>
+            <user>
+               <id>1</id>
+            </user>
+         </reminder>
+      </soap:createReminder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://soap.todoeyear.lucasliet.dev/Remindersws/createReminder"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="a30d1263-c96f-4ffc-81f1-d6fb3b128656" isOneWay="false" action="" name="deleteReminder" bindingOperationName="deleteReminder" type="Request-Response" outputName="deleteReminderResponse" inputName="deleteReminder" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="72099303-52a2-46e9-81d2-3c1d2c92bf03" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/todoeyear-web/Remindersws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soap.todoeyear.lucasliet.dev/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:deleteReminder>
+         <id>31</id>
+      </soap:deleteReminder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://soap.todoeyear.lucasliet.dev/Remindersws/deleteReminder"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="dc8d7f9d-a92b-4fe3-b389-485a545b0a02" isOneWay="false" action="" name="listAllReminders" bindingOperationName="listAllReminders" type="Request-Response" outputName="listAllRemindersResponse" inputName="listAllReminders" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="da427420-cc4b-4e70-addc-a955f6dc7268" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/todoeyear-web/Remindersws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soap.todoeyear.lucasliet.dev/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:listAllReminders/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://soap.todoeyear.lucasliet.dev/Remindersws/listAllReminders"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4ca00c32-2e35-40f5-a8d9-7dfa44da6e89" isOneWay="false" action="" name="listReminder" bindingOperationName="listReminder" type="Request-Response" outputName="listReminderResponse" inputName="listReminder" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="95fa0a0c-cecf-4698-bc28-72ec1a4f5498" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/todoeyear-web/Remindersws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soap.todoeyear.lucasliet.dev/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:listReminder>
+         <id>1</id>
+      </soap:listReminder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://soap.todoeyear.lucasliet.dev/Remindersws/listReminder"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="cd230409-318f-45b2-84e4-57d09ce90445" isOneWay="false" action="" name="updateReminder" bindingOperationName="updateReminder" type="Request-Response" outputName="updateReminderResponse" inputName="updateReminder" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e33a0887-d183-4433-8269-83b530684b5c" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/todoeyear-web/Remindersws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soap="http://soap.todoeyear.lucasliet.dev/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <soap:updateReminder>
+         <reminder>
+         	  <id>30</id>
+            <title>SoapUI</title>
+            <body>Lembrete alterado pelo SoapUI</body>
+            <deadline>2021-01-26</deadline>
+            <user>
+               <id>1</id>
+            </user>
+         </reminder>
+      </soap:updateReminder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://soap.todoeyear.lucasliet.dev/Remindersws/updateReminder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
