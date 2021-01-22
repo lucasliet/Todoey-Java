@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<meta charset="utf-8"/>
+
+	<title>Todoey</title>
+	
+	<base href="/todoey/"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+	<link rel="stylesheet" href="resources/css/global.css"/>
+	<link rel="stylesheet" href="resources/css/home.css"/>
+
+	<!-- PWA -->
+	<link rel="icon" type="image/png" sizes="32x32"
+		href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/favicon-16x16.png" />
+	<link rel="apple-touch-icon" sizes="180x180"
+		href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/apple-touch-icon.png"/>
+	<link rel="icon" type="image/png" sizes="32x32"
+		href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/favicon-32x32.png"/>
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/favicon-16x16.png"/>
+	<link rel="manifest" href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/site.webmanifest"/>
+	<link rel="mask-icon" href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/safari-pinned-tab.svg"
+		color="#5bbad5"/>
+	<link rel="shortcut icon" href="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/favicon.ico"/>
+	<meta name="msapplication-TileColor" content="#3bb5d4"/>
+	<meta name="msapplication-config" content="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/browserconfig.xml"/>
+	<meta name="theme-color" content="#3bb5d4"/>
+
+	<!-- Open Graph  -->
+	<meta property="og:site_name" content="Todoey"/>
+	<meta property="og:title" content="Todoey"/>
+	<meta property="og:description"
+		content="A application to save, edit and delete a to-do reminder, made in Java with jsf, Wildfly hosting REST and SOAP APIs"/>
+	<meta property="og:image"
+		content="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/Cover.png"/>
+	<meta property="og:url" content="%PUBLIC_URL%"/>
+
+	<!-- Twitter -->
+	<meta name="twitter:site" content="Todoey" />
+	<meta name="twitter:title" content="Todoey" />
+	<meta name="twitter:description"
+		content="A application to save, edit and delete a to-do reminder, made in Java with jsf, Wildfly hosting REST and SOAP APIs" />
+	<meta name="twitter:card" content="summary_large_image"/>
+	<meta name="twitter:image"
+		content="https://raw.githubusercontent.com/lucasliet/Todoey/main/src/assets/Cover.png" />
+
+</h:head>
+<h:body>
+	<header>
+		<h:form rendered="#{loggedUser != null}">
+			<h:commandLink id="logout-button" action="#{loginBean.logoff}">
+				<i class="material-icons white-text logout-button">exit_to_app</i>
+			</h:commandLink>
+		</h:form>
+
+		<h1 class="logo">Todoey</h1>
+	</header>
+
+	<main>
+		<ui:insert name="content">
+		</ui:insert>
+	</main>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</h:body>
+
+</html>
