@@ -5,6 +5,7 @@ class LoginPage < SitePrism::Page
   element :senha, '#senha'
   element :login_button, '#login-button'
   element :signup_button, '#signup-button'
+  element :error_messages, '.error-messages > li'
 
   def login _email, _senha
     email.set _email

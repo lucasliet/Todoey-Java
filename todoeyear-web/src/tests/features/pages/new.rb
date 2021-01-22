@@ -5,6 +5,7 @@ class NewPage < SitePrism::Page
   element :deadline, '#reminder_deadline'
   element :body, '#reminder_body'
   element :save_button, '#save-button'
+  element :error_messages, '.error-messages > li'
 
   def register_reminder _title, _deadline, _body
     title.set _title

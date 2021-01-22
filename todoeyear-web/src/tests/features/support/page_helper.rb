@@ -1,4 +1,4 @@
-Dir[File.join(File.dirname(__FILE__), '../pages/*_page.rb')].each do |file|
+Dir[File.join(File.dirname(__FILE__), '../pages/*.rb')].each do |file|
   require file
 end
 

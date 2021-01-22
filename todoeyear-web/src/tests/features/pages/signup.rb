@@ -4,6 +4,7 @@ class SignupPage < SitePrism::Page
   element :email, '#email'
   element :senha, '#senha'
   element :signin_button, '#signup-button'
+  element :error_messages, '.error-messages > li'
 
   def cadastrar _email, _senha
     email.set _email
