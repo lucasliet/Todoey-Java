@@ -53,14 +53,14 @@ public class ReminderDAO implements Serializable {
 	}
 
 	public List<Reminder> findAllFromLoggedUser() {
-		List<Reminder> sortedList = dao.findAll("user", LoginUtil.getLoggedUser()).stream()
+		var sortedList = dao.findAll("user", LoginUtil.getLoggedUser()).stream()
 				.sorted((reminder1, reminder2) -> reminder1.getId().compareTo(reminder2.getId()))
 				.collect(Collectors.toList());
 		return sortedList;
 	}
 	
 	public List<Reminder> findAll(){
-		List<Reminder> sortedList = dao.findAll().stream()
+		var sortedList = dao.findAll().stream()
 				.sorted((reminder1, reminder2) -> reminder1.getId().compareTo(reminder2.getId()))
 				.collect(Collectors.toList());
 		return sortedList;

@@ -82,7 +82,15 @@ public class ReminderResource {
     	return Response.ok().entity(reminder).header("Allow", "PUT").build();
         	
     }
-
+    
+    /**
+     * It checks if the reminders is in DataBase
+     * if not, throw a {@link WebApplicationException
+     * with the message "Reminder not found!" and
+     * response status 404 not found
+     * @param id reminder's id
+     * @return reminder
+     */
 	private Reminder returnReminderIfExists(Integer id) {
 		var reminder = reminderDAO.findById(id);
 		
@@ -91,6 +99,12 @@ public class ReminderResource {
 		return reminder;
 	}
 	
+	/**
+	 * it trims the exception fully qualified name
+	 * and shows only the message to user
+	 * with the response status of 400 bad request
+	 * @param exception to extract the error message°
+	 */
 	private Response handleException(Exception e) {
 		var responseObj = Map.of("error", e.getMessage().split(":")[1].trim());
         

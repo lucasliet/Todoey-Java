@@ -41,7 +41,7 @@ public class GenericDAO<T> implements Serializable {
 		return list;
 	}
 	
-	public <any> List<T> findAll(String expression1, any expression2) {
+	public List<T> findAll(String expression1, Object expression2) {
 		var criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> query = criteriaBuilder.createQuery(classType);
 		Root<T> root = query.from(classType);
@@ -55,23 +55,6 @@ public class GenericDAO<T> implements Serializable {
 	public T findById(Integer id) {
 		T instance = em.find(classType, id);
 		return instance;
-	}
-
-	public int countAllReminders() {
-		long result = (Long) em.createQuery("select count(n) from reminder n")
-				.getSingleResult();
-
-		return (int) result;
-	}
-
-	public List<T> findAllInPages(int firstResult, int maxResults) {
-		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classType);
-		query.select(query.from(classType));
-
-		List<T> list = em.createQuery(query).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
-
-		return list;
 	}
 
 }

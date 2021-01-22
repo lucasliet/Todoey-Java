@@ -13,7 +13,7 @@
 
 
 	<lifecycle>
-		<phase-listener>dev.lucasliet.todoeyear.util.Autorizador</phase-listener>
+		<phase-listener>dev.lucasliet.todoeyear.util.AuthFilter</phase-listener>
 		<phase-listener>dev.lucasliet.todoeyear.util.LogPhaseListener</phase-listener>
 	</lifecycle>
 

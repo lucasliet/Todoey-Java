@@ -71,12 +71,26 @@ public class Remindersws {
 		if (reminder == null) throw new RuntimeException("Reminder not found");
 	}
 	
+	/**
+	 * it trims the exception fully qualified name
+	 * and shows only the message to user as a runtime exception
+	 * @param exception to extract the error message
+	 */
 	private void handleException(Exception e) {
 		throw new RuntimeException(e.getMessage().split(":")[1].trim());
 	}
 
 }
 
+
+/**
+ * Class to parse the reminders list on soap
+ * it Uses @XmlRootElement and @XmlAccessorType
+ * to map itself as xml
+ * and @XmlElement to name each children of the list
+ * as <code>reminder</code>
+ * @author Lucas Souza <lucasouliveira@gmail.com>
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 class ListReminders {

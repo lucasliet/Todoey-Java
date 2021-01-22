@@ -5,6 +5,11 @@ import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+/**
+ * Utilities regarding jsf front-end
+ * it has constants for all pages
+ * @author Lucas Souza <lucasouliveira@gmail.com>
+ */
 public class JsfUtil {
 	
 	public static final String LOGIN_PAGE   = "login?faces-redirect=true";
@@ -18,8 +23,12 @@ public class JsfUtil {
 		return FacesContext.getCurrentInstance();
 	}
 	
+	/**
+	 * Show the error message to user
+	 * @param message
+	 */
 	public static void showErrorMessage(String message) {
-		FacesContext context = FacesContext.getCurrentInstance();
+		var context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getFlash().setKeepMessages(true);
 		context.addMessage(null, new FacesMessage(message));
 	}

@@ -26,7 +26,12 @@ public class UserDAO implements Serializable {
 	void init() {
 		this.dao = new GenericDAO<User>(this.manager, User.class);
 	}
-
+	
+	/**
+	 * Find user by e-mail and password
+	 * @param user with only e-mail and password
+	 * @return user fully from db
+	 */
 	public User retrieveUser(User user) {
 		TypedQuery<User> query = manager.createQuery(
 				" select u from User u "
