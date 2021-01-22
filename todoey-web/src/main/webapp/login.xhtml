@@ -43,6 +43,15 @@
 						</a>
 					</fieldset>
 				</h:form>
+				<h:form rendered="true">
+					<fieldset>
+						<a id="delete-test-users-button" 
+							jsf:action="#{loginBean.deleteTestUsers()}" 
+							class="waves-effect waves-light red white-text btn btn-block">
+							{Admin} Delete Test Users
+						</a>
+					</fieldset>
+				</h:form>
 			</div>
 		</ui:define>
 

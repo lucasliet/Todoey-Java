@@ -59,8 +59,9 @@ public class LoginBean implements Serializable {
 		return JsfUtil.LOGIN_PAGE;
 	}
 
-	public void deleteTestUsers() {
+	public String deleteTestUsers() {
 		userDAO.deleteTestUsers();
+		return JsfUtil.LOGIN_PAGE;
 	}
 	
 }

@@ -60,11 +60,15 @@ public class UserDAO implements Serializable {
 	}
 	
 	public void deleteTestUsers() {
-		manager.createQuery(
-				" delete from User u " +
-			    " where u.email = 'usuario%@test.com",
-				User.class)
-			   .executeUpdate();
+		var query = manager.createNativeQuery(
+				" delete from users "
+			  + " where email like 'usuario%@test.com'");
+
+		try {
+			query.executeUpdate();
+		} catch (NoResultException ex) {
+			
+		}
 	}
 
 }
