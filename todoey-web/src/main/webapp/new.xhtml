@@ -20,13 +20,13 @@
 				<h:messages styleClass="error-messages"/>
 				<div class="col s6 input-field">
 					<input type="text" id="reminder_title"
-						jsf:value="#{reminderBean.reminder.title}" required="true" /> <label
-						for="reminder_title">Title:</label>
+						jsf:value="#{reminderBean.reminder.title}" required="true" /> 
+					<label for="reminder_title">Title:</label>
 				</div>
 
 				<div class="col s6 input-field">
 					<input type="text" class="datepicker" id="reminder_deadline"
-						jsf:value="#{reminderBean.deadline}" required="true" />
+						jsf:value="#{reminderBean.deadline}" required="true"/>
 					<label for="reminder_deadline">Deadline:</label>
 				</div>
 
@@ -42,13 +42,7 @@
 				Save
 			</button>
 		</form>
-		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-				const elems = document.querySelectorAll('.datepicker');
-				const options = { format: 'dd/mm/yyyy' }
-				const instances = M.Datepicker.init(elems, options);
-			});
-		</script>
+		<h:outputScript library="js" name="dateInputHandler.js"/>
 	</ui:define>
 
 </ui:composition>
