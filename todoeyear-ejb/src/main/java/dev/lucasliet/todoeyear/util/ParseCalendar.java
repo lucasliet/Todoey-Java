@@ -6,15 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class ParseCalendar {
-	public static Calendar stringToCalendar(String deadline) {
-		try {
+	public static Calendar stringToCalendar(String deadline) throws ParseException {
 			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(deadline);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
 			return calendar;
-		} catch (ParseException e) {
-			throw new IllegalArgumentException(e);
-		}	
 	}
 	
 	public static String calendarToString(Calendar deadline) {

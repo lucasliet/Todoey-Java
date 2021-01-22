@@ -11,21 +11,21 @@
 		<ui:define name="conteudo">
 		
 			<h:form id="signup" styleClass="curved-white-body">
-				
 				<fieldset class="row">
+					<h:messages styleClass="error-messages"/>
 					<div class="col s12 input-field">
 						<input type="email" id="email"
 							jsf:value="#{loginBean.user.email}" required="true" /> 
-							<label for="email">Email</label>
+							<label for="email">Email:</label>
 					</div>
 					<div class="col s12 input-field">
 						<input type="password" id="senha"
 							jsf:value="#{loginBean.user.password}" required="true" /> 
-							<label for="senha">Senha</label>
+							<label for="senha">Password:</label>
 					</div>
 
 					<button id="signup-button" jsf:action="#{loginBean.singUp}" class="waves-effect waves-light blue lighten-2 btn btn-block">
-						Cadastre-se
+						Send
 					</button>					
 				</fieldset>
 			</h:form>

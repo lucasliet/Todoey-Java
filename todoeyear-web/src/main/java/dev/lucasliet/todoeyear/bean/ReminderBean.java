@@ -2,12 +2,8 @@ package dev.lucasliet.todoeyear.bean;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,13 +12,13 @@ import javax.transaction.Transactional;
 
 import dev.lucasliet.todoeyear.dao.ReminderDAO;
 import dev.lucasliet.todoeyear.model.Reminder;
+import dev.lucasliet.todoeyear.util.JsfUtil;
 import dev.lucasliet.todoeyear.util.ParseCalendar;
 
 @Named
 @ViewScoped
+@SuppressWarnings("serial")
 public class ReminderBean implements Serializable {
-
-	private static final long serialVersionUID = 1L;
 
 	private Reminder reminder = new Reminder();
 	
@@ -63,26 +59,31 @@ public class ReminderBean implements Serializable {
 
 	@Transactional
 	public String save() {
-		this.reminder.setDeadline(ParseCalendar.stringToCalendar(deadline));
-		if (this.reminder.getId() == null) {
-			reminderDAO.add(this.reminder);
-			this.reminders = reminderDAO.findAllFromLoggedUser();
-		} else {
-			reminderDAO.update(this.reminder);
+		try {
+			reminder.setDeadline(ParseCalendar.stringToCalendar(deadline));
+		} catch (ParseException e) {
+			JsfUtil.showErrorMessage("Invalid Date Format! use dd/mm/yyyy pattern");
+			return JsfUtil.NEW_PAGE;
 		}
-		System.out.println(reminder);
-		this.reminder = new Reminder();
-		return "home?faces-redirect=true";
+		
+		if (reminder.getId() == null) {
+			reminderDAO.add(reminder);
+			reminders = reminderDAO.findAllFromLoggedUser();
+		} else {
+			reminderDAO.update(reminder);
+		}
+		reminder = new Reminder();
+		return JsfUtil.HOME_PAGE;
 	}
 
 	@Transactional
 	public String remove(Reminder reminder) {
 		reminderDAO.remove(reminder);
 		this.reminders = reminderDAO.findAllFromLoggedUser();
-		return "home?face-redirect=true";
+		return JsfUtil.HOME_PAGE;
 	}
 
-	public String show(Reminder reminder) {
-		return "new?faces-redirect=true&reminderId="+reminder.getId();
+	public String edit(Reminder reminder) {
+		return JsfUtil.NEW_PAGE + "&reminderId=" + reminder.getId();
 	}
 }

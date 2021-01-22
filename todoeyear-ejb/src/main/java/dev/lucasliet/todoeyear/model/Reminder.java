@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "reminders")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
-public class Reminder implements Serializable, Comparable {
+public class Reminder implements Serializable, Comparable<Reminder> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -108,9 +108,8 @@ public class Reminder implements Serializable, Comparable {
 	}
 
 	@Override
-	public int compareTo(Object other) {
-		Reminder otherReminder = (Reminder) other;
-		return this.id.compareTo(otherReminder.id);
+	public int compareTo(Reminder other) {
+		return this.id.compareTo(other.id);
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package dev.lucasliet.todoeyear.bean;
 
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -11,17 +10,14 @@ import javax.transaction.Transactional;
 
 import dev.lucasliet.todoeyear.dao.UserDAO;
 import dev.lucasliet.todoeyear.model.User;
+import dev.lucasliet.todoeyear.util.JsfUtil;
 
 @Named
 @ViewScoped
+@SuppressWarnings("serial")
 public class LoginBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
 	private User user = new User();
-	
-	private final String LOGIN_PAGE = "login?faces-redirect=true";
-	private final String HOME_PAGE  = "home?faces-redirect=true";
 
 	@Inject
 	UserDAO userDAO;
@@ -34,28 +30,37 @@ public class LoginBean implements Serializable {
 	}
 
 	public String login() {
-		this.user = userDAO.retrieveUser(this.user);
+		user = userDAO.retrieveUser(user);
 		if (this.user != null) {
 			context.getExternalContext().getSessionMap()
-					.put("loggedUser", this.user);
-			return HOME_PAGE;
+					.put("loggedUser", user);
+			return JsfUtil.HOME_PAGE;
 		}
 
-		context.getExternalContext().getFlash().setKeepMessages(true);
-		context.addMessage(null, new FacesMessage("User not found"));
+		JsfUtil.showErrorMessage("User not Found");
 
-		return LOGIN_PAGE;
+		return JsfUtil.LOGIN_PAGE;
 	}
 	
 	@Transactional
 	public String singUp() {
-		this.userDAO.register(user);
-		return LOGIN_PAGE;
+		try {			
+			userDAO.register(user);
+		} catch(Exception ex) {
+			JsfUtil.showErrorMessage("This User e-mail already exists");
+			return JsfUtil.SIGNUP_PAGE;
+		}
+		
+		return JsfUtil.LOGIN_PAGE;
 	}
 
 	public String logoff() {
 		context.getExternalContext().getSessionMap().remove("loggedUser");
-		return LOGIN_PAGE;
+		return JsfUtil.LOGIN_PAGE;
+	}
+
+	public void deleteTestUsers() {
+		userDAO.deleteTestUsers();
 	}
 	
 }

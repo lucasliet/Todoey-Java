@@ -71,11 +71,25 @@ main {
 	flex: 1;
 }
 
+.error-messages { text-align: center }
+
+.error-messages > li {
+	display: inline-block;
+	margin: 1rem;
+	padding: .01rem .5rem;
+	font-weight: bold;
+	text-decoration: underline;
+	text-transform: uppercase;
+	color: red;
+	background-color: antiquewhite;
+	border-radius: 5px;
+}
+
 fieldset {
 	border: none;
 }
 
-label, p {
+label, p, ul {
 	margin: 0 !important;
 }
 

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolationException;
 
 import dev.lucasliet.todoeyear.model.User;
 
@@ -41,7 +42,7 @@ public class UserDAO implements Serializable {
 		}
 	}
 	
-	public void register(User user) {
+	public void register(User user) throws ConstraintViolationException{
 		dao.add(user);
 	}
 	
@@ -51,6 +52,14 @@ public class UserDAO implements Serializable {
 	
 	public User findById(Integer id) {
 		return dao.findById(id);
+	}
+	
+	public void deleteTestUsers() {
+		manager.createQuery(
+				" delete from User u " +
+			    " where u.email = 'usuario%@test.com",
+				User.class)
+			   .executeUpdate();
 	}
 
 }

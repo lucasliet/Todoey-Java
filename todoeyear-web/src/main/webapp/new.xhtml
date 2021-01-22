@@ -16,30 +16,30 @@
 	<ui:define name="conteudo">
 		<form jsf:id="formreminder" class="curved-white-body container">
 
-			<fieldset class="row" style="border: none;">
-
+			<fieldset class="row">
+				<h:messages styleClass="error-messages"/>
 				<div class="col s6 input-field">
 					<input type="text" id="reminder_title"
 						jsf:value="#{reminderBean.reminder.title}" required="true" /> <label
-						for="reminder_title">Título</label>
+						for="reminder_title">Title:</label>
 				</div>
 
 				<div class="col s6 input-field">
 					<input type="text" class="datepicker" id="reminder_deadline"
 						jsf:value="#{reminderBean.deadline}" required="true" />
-					<label for="reminder_deadline">Deadline</label>
+					<label for="reminder_deadline">Deadline:</label>
 				</div>
 
 				<div class="col s12 input-field">
 					<textarea class="materialize-textarea" id="reminder_body"
 						jsf:value="#{reminderBean.reminder.body}" required="true"></textarea>
-					<label for="reminder_body">Mensagem</label>
+					<label for="reminder_body">Message:</label>
 				</div>
 
 			</fieldset>
 
 			<button id="save-button" jsf:action="#{reminderBean.save}" class="waves-effect waves-light blue lighten-2 btn btn-block">
-				Gravar Lembrete
+				Save
 			</button>
 		</form>
 		<script>

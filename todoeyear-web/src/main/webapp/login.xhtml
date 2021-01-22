@@ -14,28 +14,32 @@
 				<h:form id="login">
 					
 					<fieldset class="row">
+						<h:messages styleClass="error-messages"/>
 						<div class="col s12 input-field">
 							<input type="email" id="email"
 								jsf:value="#{loginBean.user.email}" required="true" /> 
-								<label for="email">Email</label>
+								<label for="email">Email:</label>
 						</div>
 						<div class="col s12 input-field">
 							<input type="password" id="senha"
 								jsf:value="#{loginBean.user.password}" required="true" /> 
-								<label for="senha">Senha</label>
+								<label for="senha">Password:</label>
 						</div>
 	
-						<button id="login-button" jsf:action="#{loginBean.login}" class="waves-effect waves-light blue lighten-2 btn btn-block">
+						<button id="login-button" 
+							jsf:action="#{loginBean.login}" 
+							class="waves-effect waves-light blue lighten-2 btn btn-block">
 							Login
 						</button>
-						
 											
 					</fieldset>
 				</h:form>
 				<h:form>
-					<fieldset class="row">
-						<a id="signup-button" jsf:action="signup.xhtml?face-redirect=true" class="waves-effect waves-light white blue-text btn btn-block">
-							Cadastro
+					<fieldset>
+						<a id="signup-button" 
+							jsf:action="signup.xhtml?face-redirect=true" 
+							class="waves-effect waves-light white blue-text btn btn-block">
+							Sign-Up
 						</a>
 					</fieldset>
 				</h:form>
