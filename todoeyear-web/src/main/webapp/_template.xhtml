@@ -17,7 +17,8 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-	<h:outputStylesheet library="css" name="style.css?v=7" />
+	<link rel="stylesheet" href="resources/css/global.css"/>
+	<link rel="stylesheet" href="resources/css/home.css"/>
 
 	<!-- PWA -->
 	<link rel="icon" type="image/png" sizes="32x32"
@@ -58,7 +59,7 @@
 
 </h:head>
 <h:body>
-	<header id="cabecalho">
+	<header>
 		<h:form rendered="#{loggedUser != null}">
 			<h:commandLink id="logout-button" action="#{loginBean.logoff}">
 				<i class="material-icons white-text logout-button">exit_to_app</i>
@@ -68,17 +69,12 @@
 		<h1 class="logo">Todoey</h1>
 	</header>
 
-	<!-- <h3 class="title">
-		<ui:insert name="titulo"></ui:insert>
-	</h3> -->
-
-	<main id="conteudo">
-		<ui:insert name="conteudo">
+	<main>
+		<ui:insert name="content">
 		</ui:insert>
 	</main>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </h:body>
 
