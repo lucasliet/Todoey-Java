@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+window.onload = () => {
 	const elems = document.querySelectorAll('.datepicker');
 	elems.forEach(elem => {
 		elem.onchange = () => {
@@ -7,11 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				elem.setCustomValidity('');
 			else
 				elem.setCustomValidity(
-					'Please insert date in format dd/mm/yyyy or click to pick a date'
+					window.navigator.language === 'pt-BR' 
+						? 'Por favor insira a data no formato dd/mm/yyyy ou clique para escolher uma data'
+						: 'Please insert date in format dd/mm/yyyy or click to pick a date'
 				)
 		}
 	});
 	const options = { format: 'dd/mm/yyyy' }
-	const instances = M.Datepicker.init(elems, options);
-});
-
+	M.Datepicker.init(elems, options);
+};

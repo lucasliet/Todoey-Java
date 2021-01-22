@@ -12,13 +12,14 @@
 
 	<title>Todoey</title>
 	
-	<base href="/todoey-web/"/>
+	<base href="/todoey/"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
-	<h:outputStylesheet  library="css" name="global.css"/>
-	<h:outputStylesheet  library="css" name="home.css"/>
+	<h:outputStylesheet library="css" name="global.css"/>
+	<h:outputStylesheet library="css" name="home.css"/>
+	<h:outputScript		library="js"  name="cssForceReload.js" rendered="false"/>
 
 	<!-- PWA -->
 	<link rel="icon" type="image/png" sizes="32x32"
@@ -75,7 +76,6 @@
 	</main>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
 </h:body>
 
 </html>
