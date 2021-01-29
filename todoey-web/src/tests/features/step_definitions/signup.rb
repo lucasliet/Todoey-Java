@@ -7,5 +7,5 @@ end
 Quando('logo com usuário criado aleatóriamente.') do
   login_page.load
   login_page.login @random_user, '123'
-  expect(page).to have_current_path('/todoey/home.xhtml', ignore_query: true)
+  expect(page).to have_current_path('/todoey-web/home.xhtml', ignore_query: true)
 end

@@ -1,9 +1,9 @@
 Então('checo se estou na página de login.') do
-  expect(page).to have_current_path('/todoey/login.xhtml', ignore_query: true)
+  expect(page).to have_current_path('/todoey-web/login.xhtml', ignore_query: true)
 end
 
 Então('checo se estou na página home.') do
-  expect(page).to have_current_path('/todoey/home.xhtml', ignore_query: true)
+  expect(page).to have_current_path('/todoey-web/home.xhtml', ignore_query: true)
 end
 
 Quando('eu insiro os dados e clico em logar.') do
