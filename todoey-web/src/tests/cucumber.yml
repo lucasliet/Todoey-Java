@@ -1,0 +1,17 @@
+default: --publish-quiet --profile pretty -p homolog -p firefox
+
+pretty:   --format pretty
+progress: --format progress
+
+homolog:  AMBIENTE=homolog
+producao: AMBIENTE=producao
+
+chrome:      BROWSER=chrome
+firefox:     BROWSER=firefox
+ie:          BROWSER=internet_explorer
+edge:        BROWSER=edge
+safari:      BROWSER=safari
+poltergeist: BROWSER=poltergeist
+
+chrome_headless:  BROWSER=chrome_headless
+firefox_headless: BROWSER=firefox_headless
